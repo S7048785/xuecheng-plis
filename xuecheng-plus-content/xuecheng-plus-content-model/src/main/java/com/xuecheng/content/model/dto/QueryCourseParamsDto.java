@@ -1,7 +1,7 @@
 package com.xuecheng.content.model.dto;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Mr.M
@@ -11,6 +11,9 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class QueryCourseParamsDto {
 
     //审核状态
