@@ -23,8 +23,75 @@
     </resultMap>
 
     <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, pname, parentid, grade, media_type, start_time, end_time, description, timelength, orderby, course_id, course_pub_id, status, is_preview, create_date, change_date
-    </sql>
+<!--    <sql id="Base_Column_List">-->
+<!--        id, pname, parentid, grade, media_type, start_time, end_time, description, timelength, orderby, course_id, course_pub_id, status, is_preview, create_date, change_date-->
+<!--    </sql>-->
+    <select id="selectTreeNodes" parameterType="long" resultMap="TeachplanMap">
+        select
+            one.id             one_id,
+            one.pname          one_pname,
+            one.parentid       one_parentid,
+            one.grade          one_grade,
+            one.media_type     one_mediaType,
+            one.start_time     one_startTime,
+            one.end_time       one_endTime,
+            one.orderby        one_orderby,
+            one.course_id      one_courseId,
+            one.course_pub_id  one_coursePubId,
+            two.id             two_id,
+            two.pname          two_pname,
+            two.parentid       two_parentid,
+            two.grade          two_grade,
+            two.media_type     two_mediaType,
+            two.start_time     two_startTime,
+            two.end_time       two_endTime,
+            two.orderby        two_orderby,
+            two.course_id      two_courseId,
+            two.course_pub_id  two_coursePubId,
+            m1.media_fileName mediaFilename,
+            m1.id teachplanMeidaId,
+            m1.media_id mediaId
+        from teachplan one left join teachplan two on one.id = two.parentid left join teachplan_media m1 on two.id = m1.teachplan_id
+        where one.parentid = 0 and one.course_id = #{courseId}
+        order by one.orderby, two.orderby
+    </select>
+
+    <resultMap id="TeachplanMap" type="com.xuecheng.content.model.dto.TeachplanDto">
+
+        <id property="id" column="one_id" />
+        <result property="pname" column="one_pname" />
+        <result property="parentid" column="one_parentid" />
+        <result property="grade" column="one_grade" />
+        <result property="mediaType" column="one_mediaType" />
+        <result property="startTime" column="one_startTime" />
+        <result property="endTime" column="one_endTime" />
+        <result property="orderby" column="one_orderby" />
+        <result property="courseId" column="one_courseId" />
+        <result property="coursePubId" column="one_coursePubId" />
+
+        <!--封装子节点-->
+        <collection property="teachPlanTreeNodes" ofType="com.xuecheng.content.model.dto.TeachplanDto">
+            <id property="id" column="two_id" />
+            <result property="pname" column="two_pname" />
+            <result property="parentid" column="two_parentid" />
+            <result property="grade" column="two_grade" />
+            <result property="mediaType" column="two_mediaType" />
+            <result property="startTime" column="two_startTime" />
+            <result property="endTime" column="two_endTime" />
+            <result property="orderby" column="two_orderby" />
+            <result property="courseId" column="two_courseId" />
+            <result property="coursePubId" column="two_coursePubId" />
+
+            <!--封装TeachplanMedia对象-->
+            <association property="teachplanMedia" javaType="com.xuecheng.content.model.po.TeachplanMedia">
+                <id property="id" column="teachplanMeidaId" />
+                <result property="mediaFilename" column="mediaFilename" />
+                <result property="mediaId" column="mediaId" />
+                <result column="two_id"   property="teachplanId" />
+                <result column="two_courseId"   property="courseId" />
+                <result column="two_coursePubId"   property="coursePubId" />
+            </association>
+        </collection>
+    </resultMap>
 
 </mapper>

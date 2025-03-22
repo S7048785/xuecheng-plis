@@ -1,18 +1,5 @@
-server:
-  servlet:
-    context-path: /content
-  port: 63040
-#微服务配置
-spring:
-  application:
-    name: content-api
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.142.129:3306/xc166_content?serverTimezone=UTC&userUnicode=true&useSSL=false&
-    username: root
-    password: 123
 # mybatis配置
-mybatis-plus:
+mybatis:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -23,8 +10,6 @@ logging:
     com:
       xuecheng:
         controller: info
-        mapper: debug
-        service: info
 #swagger:
 #  title: "学成在线内容管理系统"
 #  description: "内容系统管理系统对课程相关信息进行管理"
