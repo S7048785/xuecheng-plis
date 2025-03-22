@@ -77,7 +77,7 @@ public class CourseBaseInfoServiceImpl implements CourseBaseInfoService {
         if (insert <= 0) {
             throw new RuntimeException("新增课程基本信息失败");
         }
-        // TODO: 向课程营销表保存课程营销信息
+        // 向课程营销表保存课程营销信息
         CourseMarket courseMarket = new CourseMarket();
         BeanUtils.copyProperties(addCourseDto, courseMarket);
         courseMarket.setId(courseBaseNew.getId());
@@ -89,7 +89,7 @@ public class CourseBaseInfoServiceImpl implements CourseBaseInfoService {
         } else {
             courseMarketMapper.updateById(courseMarket);
         }
-        // TODO: 返回课程基本信息及营销信息
+        // 返回课程基本信息及营销信息
         CourseBaseInfoDto courseBaseInfoDto = new CourseBaseInfoDto();
         return getCourseBaseInfoDto(courseBaseNew, courseBaseInfoDto, courseMarket);
     }
