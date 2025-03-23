@@ -1,7 +1,6 @@
-#微服务配置
 spring:
   application:
-    name: content-api
+    name: gateway
   profiles:
     active: dev
   cloud:
@@ -16,8 +15,8 @@ spring:
         file-extension: yaml
         refresh-enabled: true
         extension-configs:
-          - data-id: content-service.yaml
-            group: xuecheng-plus
+          - data-id: gateway-dev.yaml
+            group: xuecheng-plus-project
             refresh: true
         shared-configs:
           - data-id: mybatis-config.yaml

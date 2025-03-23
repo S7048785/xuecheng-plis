@@ -1,8 +1,24 @@
+spring:
+  application:
+    name: content-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.142.129:8848 # nacos地址 (这里是虚拟机ip)
+      config:
+        namespace: dev
+        group: xuecheng-plus
+        file-extension: yaml
+        shared-configs:
+          - dataId: content-api.yaml
+          - dataId: mybatis-config.yaml
+          - dataId: log-config.yaml
 # mybatis配置
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # 日志文件配置路径
 logging:

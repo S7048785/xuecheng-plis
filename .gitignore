@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 *.sql
+*.Tests.java
 ### STS ###
 .apt_generated
 .classpath
