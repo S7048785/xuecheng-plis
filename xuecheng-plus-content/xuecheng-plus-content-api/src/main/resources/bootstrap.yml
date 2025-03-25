@@ -8,10 +8,10 @@ spring:
       server-addr: 192.168.142.129:8848
       discovery:
         namespace: dev
-        group: xuecheng-plus
+        group: xuecheng-plus-project
       config:
         namespace: dev
-        group: xuecheng-plus
+        group: xuecheng-plus-project
         file-extension: yaml
         refresh-enabled: true
         extension-configs:
@@ -25,23 +25,3 @@ spring:
           - data-id: log-config.yaml
             group: xuecheng-plus-common
             refresh: true
-#        shared-configs:
-#          - dataId: content-api.yaml
-#          - dataId: mybatis-config.yaml
-#          - dataId: log-config.yaml
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://192.168.142.129:3306/xc166_content?serverTimezone=UTC&userUnicode=true&useSSL=false&
-#    username: root
-#    password: 123
-# mybatis配置
-#mybatis-plus:
-#  configuration:
-#    map-underscore-to-camel-case: true
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#swagger:
-#  title: "学成在线内容管理系统"
-#  description: "内容系统管理系统对课程相关信息进行管理"
-#  base-package: com.xuecheng.content
-#  enabled: true
-#  version: 1.0.0

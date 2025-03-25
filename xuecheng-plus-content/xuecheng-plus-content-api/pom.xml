@@ -36,11 +36,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!--读取bootstrap文件-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-bootstrap</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
         <!--nacos 服务注册发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -55,17 +55,5 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <!-- Spring Boot 集成 log4j2 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-log4j2</artifactId>-->
-<!--        </dependency>-->
-
-        <!-- Spring Boot 集成 swagger -->
-<!--        <dependency>-->
-<!--            <groupId>com.spring4all</groupId>-->
-<!--            <artifactId>swagger-spring-boot-starter</artifactId>-->
-<!--            <version>1.9.0.RELEASE</version>-->
-<!--        </dependency>-->
     </dependencies>
 </project>
