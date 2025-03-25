@@ -8,16 +8,12 @@ spring:
       server-addr: 192.168.142.129:8848
       discovery:
         namespace: dev
-        group: xuecheng-plus
+        group: xuecheng-plus-project
       config:
         namespace: dev
-        group: xuecheng-plus
+        group: xuecheng-plus-project
         file-extension: yaml
         refresh-enabled: true
-        extension-configs:
-          - data-id: gateway-dev.yaml
-            group: xuecheng-plus-project
-            refresh: true
         shared-configs:
           - data-id: mybatis-config.yaml
             group: xuecheng-plus-common

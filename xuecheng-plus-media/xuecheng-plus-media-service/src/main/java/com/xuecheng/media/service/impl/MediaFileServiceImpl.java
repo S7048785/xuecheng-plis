@@ -19,6 +19,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -73,8 +74,13 @@ public class MediaFileServiceImpl implements MediaFileService {
         String fileMd5 = getFileMd5(upload.getInputStream());
         // 判断文件是否存在
         MediaFiles mediaFiles = mediaFilesMapper.selectById(fileMd5);
-        if (mediaFiles != null)
-            throw new CommonException(MessageConstant.FILE_EXIST);
+        if (mediaFiles != null) {
+//            throw new CommonException(MessageConstant.FILE_EXIST);
+            log.error("文件已存在");
+            UploadFileVO uploadFileVO = new UploadFileVO();
+            BeanUtils.copyProperties(mediaFiles, uploadFileVO);
+            return uploadFileVO;
+        }
 
         // 上传文件
         String originalFilename = upload.getOriginalFilename();
