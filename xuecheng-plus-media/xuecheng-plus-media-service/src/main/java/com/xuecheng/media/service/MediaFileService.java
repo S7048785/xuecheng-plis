@@ -7,9 +7,11 @@ import com.xuecheng.media.model.dto.QueryMediaParamsDto;
 import com.xuecheng.media.model.dto.UploadFileParamsDto;
 import com.xuecheng.media.model.dto.UploadFileVO;
 import com.xuecheng.media.model.po.MediaFiles;
+import com.xuecheng.media.model.po.MediaProcess;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @description 媒资文件管理业务类
@@ -47,4 +49,7 @@ public interface MediaFileService {
     RestResponse<Boolean> checkChunk(String fileMd5, int chunkIndex);
 
     RestResponse<Boolean> uploadChunk(String fileMd5, int chunk, MultipartFile file);
+
+    RestResponse mergechunks(Long companyId, String fileMd5, int chunkTotal, UploadFileParamsDto uploadFileParamsDto);
+
 }

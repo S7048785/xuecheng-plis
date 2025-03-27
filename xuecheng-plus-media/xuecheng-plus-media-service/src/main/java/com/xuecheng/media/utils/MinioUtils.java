@@ -6,6 +6,8 @@ import com.xuecheng.media.config.MinioConfig;
 import io.minio.*;
 import io.minio.errors.ErrorResponseException;
 import io.minio.http.Method;
+import io.minio.messages.DeleteError;
+import io.minio.messages.DeleteObject;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Component
@@ -162,8 +167,34 @@ public class MinioUtils {
                             .build()
             );
         } catch (Exception e) {
-            e.printStackTrace();
         }
+    }
+
+    /**
+     * 删除多个分片文件
+     * @param bucketName 桶名
+     * @param chunkPath 分片的路径
+     * @param chunkTotal 分片总数
+     */
+    public void removeChunks(String bucketName, String chunkPath, int chunkTotal) {
+        List<DeleteObject> sources = Stream.iterate(0, i -> ++i)
+                .limit(2)
+                .map(i -> new DeleteObject(chunkPath + i))
+                .collect(Collectors.toList());
+        RemoveObjectsArgs build = RemoveObjectsArgs.builder()
+                .bucket(bucketName)
+                .objects(sources)
+                .build();
+        Iterable<Result<DeleteError>> results = minioClient.removeObjects(build);
+
+        results.forEach(r->{
+            DeleteError deleteError = null;
+            try {
+                deleteError = r.get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -178,7 +209,8 @@ public class MinioUtils {
                             .build()
             );
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            log.info("文件不存在: {}", objectName);
         }
         return null;
     }
